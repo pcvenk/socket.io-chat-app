@@ -1,0 +1,44 @@
+doctype html
+head
+    meta(charset='UTF-8')
+    title Real Time Chat App
+
+    link(rel='stylesheet', href='/css/bootstrap.css')
+    link(rel='stylesheet', href='/css/style.css')
+body
+    nav.navbar-inverse.navbar-default
+        .container-fluid
+            // Brand and toggle get grouped for better mobile display
+            .navbar-header
+                a.navbar-brand(href='#') eChat
+        // /.container-fluid
+    .container
+        br
+        .row
+            .col-sm-6.col-md-6
+                #userFormWrap
+                    h3 Create User
+                    form#userForm
+                        input#username.form-control(type='text', placeholder='User Name')
+                        br
+                        button.btn.btn-default(type='submit') Submit
+                #mainWrap
+                    h3 Speak Your Mind
+                    form#chatForm
+                        .form-group
+                        textarea#chatInput.form-control(name='body', placeholder='Drop a ' +
+                        'line or two')
+                        br
+                        button.btn.btn-default(type='submit') Submit
+                        br
+                        br
+                    #chatWindow.well
+            .col-md-4
+                h5 Chat Users
+                ul.list-group
+                    #users
+
+    script(src='/js/jquery-3.1.1.min.js')
+    script(src='/js/bootstrap.js')
+    script(src='/js/main.js')
+    script(src='/socket.io/socket.io.js')
