@@ -16,9 +16,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 //Connect to Socket
-io.socket.on('connection', function(socket){
+io.sockets.on('connection', function(socket){
    //Set UserName
    socket.on('set user', function(data, cb){
+      //if the user exists, send the error message(User already exists)
       if(users.indexOf(data) != -1){
          cb(false)
       } else {
@@ -30,7 +31,7 @@ io.socket.on('connection', function(socket){
    });
 
    function updateUsers(){
-      io.socket.emit('users', users);
+      io.sockets.emit('users', users);
    }
 });
 
