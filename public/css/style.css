@@ -1,3 +1,7 @@
 #mainWrap {
     display: none;
 }
+
+.userlist {
+    font-size: 14px;
+}
