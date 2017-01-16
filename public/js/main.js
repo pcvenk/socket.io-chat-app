@@ -25,6 +25,20 @@ userForm.submit(function(e){
     })
 });
 
+//Send Message
+chatForm.submit(function(e){
+    e.preventDefault();
+    socket.emit('send message', message.val());
+    //clear messages
+    message.val('');
+});
+
+//Show Message
+socket.on('show message', function(data){
+   //Appending data to the well
+   chatWindow.append('<strong>'+data.user+'</strong>: '+data.message+'<br>');
+});
+
 //Display Users
 socket.on('users', function(data){
     var text = '';
@@ -33,3 +47,4 @@ socket.on('users', function(data){
     }
     users.html(text);
 });
+

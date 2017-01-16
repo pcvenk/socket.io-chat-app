@@ -17,6 +17,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //Connect to Socket
 io.sockets.on('connection', function(socket){
+
    //Set UserName
    socket.on('set user', function(data, cb){
       //if the user exists, send the error message(User already exists)
@@ -34,11 +35,20 @@ io.sockets.on('connection', function(socket){
       io.sockets.emit('users', users);
    }
 
+   //disconnecting the user
    socket.on('disconnect', function(data){
       socket.username = data;
       if(!socket.username) return;
       users.splice(users.indexOf(socket.username), 1);
       updateUsers();
+   });
+
+   //sending msg
+   socket.on('send message', function(msg){
+      io.sockets.emit('show message', {
+         message: msg,
+         user: socket.username
+      });
    })
 });
 
