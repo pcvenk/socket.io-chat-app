@@ -33,6 +33,13 @@ io.sockets.on('connection', function(socket){
    function updateUsers(){
       io.sockets.emit('users', users);
    }
+
+   socket.on('disconnect', function(data){
+      socket.username = data;
+      if(!socket.username) return;
+      users.splice(users.indexOf(socket.username), 1);
+      updateUsers();
+   })
 });
 
 //Index Route
